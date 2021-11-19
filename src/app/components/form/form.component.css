@@ -1,0 +1,123 @@
+.text-center{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.contenido{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.banner{
+    background-color: rgb(22, 20, 41);
+    height: 3rem;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.banner-text{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: white;
+    margin-left: 1rem;
+}
+
+.table{
+    margin-top: 2rem;
+    width: 95%;
+    border: 1px solid black;
+}
+
+.table thead tr{
+   color: rgb(2, 2, 53);
+   text-align: center;
+}
+
+.table tbody tr{
+   text-align: center;
+}
+
+input[type="text"] {
+    width: 97%;
+    margin: auto;
+    height: 1.5rem;
+    border-radius: 0.2rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.8rem;
+}
+
+input[type="date"] {
+    width: 97%;
+    margin: auto;
+    height: 1.5rem;
+    border-radius: 0.2rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.8rem;
+}
+
+input[type='radio']{
+    padding: 2px;
+   
+}
+
+.label-radio{
+    display: flex;
+    
+    align-items: center;
+    width: 80px;
+    filter:hue-rotate(250deg);  
+    
+}
+
+
+
+.error-validation{
+    border: 4px solid rgba(255, 0, 0, 0.383);
+}
+
+.success-validation{
+    border: 4px solid rgba(0, 255, 76, 0.383);
+}
+
+.btn{
+    padding: 0.5rem;
+    border-radius: 0.2rem;
+    color: white;
+    font-family:sans-serif;
+    margin: 0.2rem;
+    font-size: 17px;
+}
+
+.btn-success{
+    background-color: green;
+}
+
+.btn-success:hover{
+    background-color: rgb(7, 112, 7);
+}
+
+.btn-danger{
+    background-color: rgb(143, 6, 6);
+}
+
+label{
+    text-align: left;
+    color: rgb(23, 100, 13);
+}
+
+.form-style{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    /* align-items: center; */
+    min-width: 30%;
+    border-radius: 0.5rem;
+    padding: 2rem;
+
+    background-color: rgb(235, 226, 226);
+}

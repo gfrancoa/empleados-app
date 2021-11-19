@@ -2,6 +2,7 @@ const ctrlEmpleado = {},
   Empleado = require("../models/empleado");
 
 ctrlEmpleado.create = async (req, res) => {
+  console.log("se ejecuta metodo create");
   const newEmpleado = new Empleado({
     name: req.body.name,
     document: req.body.document,
@@ -9,7 +10,7 @@ ctrlEmpleado.create = async (req, res) => {
     email: req.body.email,
     salary: req.body.salary,
     isFemale: req.body.isFemale,
-    dateOfBirth: req.body.dateOfBirth,
+    dateOfBirth: new Date(req.body.dateOfBirth),
   });
 
   await newEmpleado.save();
@@ -38,7 +39,7 @@ ctrlEmpleado.update = async (req, res) => {
       email: email,
       salary: salary,
       isFemale: isFemale,
-      dateOfBirth: dateOfBirth,
+      dateOfBirth: new Date(dateOfBirth),
     }
   );
   res.json({ message: "Employee updated succesfully" });

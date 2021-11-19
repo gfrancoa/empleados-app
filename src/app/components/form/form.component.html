@@ -1,0 +1,128 @@
+<div class="text-center contenido">
+  <div class="banner">
+    <h3 class="banner-text">Employee management app</h3>
+  </div>
+  <form [formGroup]="form" class="form-style">
+    <label for="doc">ID Number:</label>
+    <input
+      id="doc"
+      type="text"
+      class="form-control"
+      formControlName="document"
+      [ngClass]="{
+        'error-validation': submitted && f['document'].errors,
+        'success-validation':
+          document.valid && (document.dirty || document.touched)
+      }"
+    />
+    <label for="name">Name:</label>
+    <input
+      id="name"
+      type="text"
+      class="form-control"
+      formControlName="name"
+      [ngClass]="{
+        'error-validation': submitted && f['name'].errors,
+        'success-validation': name.valid && (name.dirty || name.touched)
+      }"
+    />
+    <label for="phone">Phone Number:</label>
+    <input
+      id="phone"
+      type="text"
+      class="form-control"
+      formControlName="phone"
+      [ngClass]="{
+        'error-validation': submitted && f['phone'].errors,
+        'success-validation': phone.valid && (phone.dirty || phone.touched)
+      }"
+    />
+    <label for="mail">E-mail:</label>
+    <input
+      id="mail"
+      type="text"
+      class="form-control"
+      formControlName="email"
+      [ngClass]="{
+        'error-validation': submitted && f['email'].errors,
+        'success-validation': email.valid && (email.dirty || email.touched)
+      }"
+    />
+    <label for="salary">Salary (in USD. No commas or points):</label>
+    <input
+      id="salary"
+      type="text"
+      class="form-control"
+      formControlName="salary"
+      [ngClass]="{
+        'error-validation': submitted && f['salary'].errors,
+        'success-validation': salary.valid && (salary.dirty || salary.touched)
+      }"
+    />
+    <label for="gender">Gender:</label>
+    <div class="label-radio">
+      <input
+        id="gender"
+        type="radio"
+        value="female"
+        name="isFemale"
+        
+        formControlName="isFemale"
+        (change)="selectGender(true)"
+      />
+      <span>Female</span>
+    </div>
+
+    <div class="label-radio">
+      <input
+        id="gender"
+        type="radio"
+        value="male"
+        name="isFemale"
+        formControlName="isFemale"
+        (change)="selectGender(false)"
+      />
+      <span>Male</span>
+    </div>
+
+     <label style="margin-top: 1rem;" for="dob">Date of Birth:</label>
+     <input type="date" name="dob" id="dob" (change)="selectDate($event)">
+
+    <button class="btn btn-success" (click)="validacion()">
+      {{ editting ? "Edit Employee" : "Add Employee" }}
+    </button>
+  </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Document</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Salary (USD)</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Date of Birth</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="employees && employees.length>0">
+    <tr *ngFor="let item of employees">
+      <th scope="row">{{item._id | slice: 0 : 10}}...</th>
+      <td>{{item.document}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.phone}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.salary}}</td>
+      <td>{{item.isFemale? "Female" : "Male"}}</td>
+      <td>{{item.dateOfBirth}}</td>
+      <td>
+         <button class="btn btn-success" (click)="edit(item)"> Editar </button>
+         <button class="btn btn-danger" (click)="delete(item._id)"> Eliminar </button>
+      </td>
+     
+      
+    </tr>
+  </tbody>
+  </table>
+</div>
