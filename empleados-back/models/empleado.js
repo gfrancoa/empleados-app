@@ -7,7 +7,7 @@ var EmpleadoSchema = new mongoose.Schema({
   email: { type: String },
   salary: { type: Number },
   isFemale: { type: Boolean },
-  dateOfBirth: { type: Date },
+  dateOfBirth: { type: String },
 });
 
 module.exports = mongoose.model("empleado_data", EmpleadoSchema);

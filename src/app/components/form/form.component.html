@@ -61,36 +61,33 @@
     />
     <label for="gender">Gender:</label>
     <div class="label-radio">
-      <input
-        id="gender"
-        type="radio"
-        value="female"
-        name="isFemale"
-        
-        formControlName="isFemale"
-        (change)="selectGender(true)"
-      />
+      <input type="radio" value="f" formControlName="isFemale" />
       <span>Female</span>
     </div>
 
     <div class="label-radio">
-      <input
-        id="gender"
-        type="radio"
-        value="male"
-        name="isFemale"
-        formControlName="isFemale"
-        (change)="selectGender(false)"
-      />
+      <input type="radio" value="m" formControlName="isFemale" />
       <span>Male</span>
     </div>
 
-     <label style="margin-top: 1rem;" for="dob">Date of Birth:</label>
-     <input type="date" name="dob" id="dob" (change)="selectDate($event)">
+    <label style="margin-top: 1rem" for="dob">Date of Birth:</label>
+    <input
+      type="date"
+      name="dob"
+      id="dob"
+      (change)="selectDate($event)"
+      formControlName="dateOfBirth"
+    />
 
     <button class="btn btn-success" (click)="validacion()">
       {{ editting ? "Edit Employee" : "Add Employee" }}
     </button>
+
+    
+      <button *ngIf="editting==true" class="btn btn-success" (click)="reset()">
+      Clear
+    </button>
+    
   </form>
   <table class="table">
     <thead>
@@ -106,23 +103,23 @@
         <th scope="col">Actions</th>
       </tr>
     </thead>
-    <tbody *ngIf="employees && employees.length>0">
-    <tr *ngFor="let item of employees">
-      <th scope="row">{{item._id | slice: 0 : 10}}...</th>
-      <td>{{item.document}}</td>
-      <td>{{item.name}}</td>
-      <td>{{item.phone}}</td>
-      <td>{{item.email}}</td>
-      <td>{{item.salary}}</td>
-      <td>{{item.isFemale? "Female" : "Male"}}</td>
-      <td>{{item.dateOfBirth}}</td>
-      <td>
-         <button class="btn btn-success" (click)="edit(item)"> Editar </button>
-         <button class="btn btn-danger" (click)="delete(item._id)"> Eliminar </button>
-      </td>
-     
-      
-    </tr>
-  </tbody>
+    <tbody *ngIf="employees && employees.length > 0">
+      <tr *ngFor="let item of employees">
+        <th scope="row">{{ item._id | slice: 0:10 }}...</th>
+        <td>{{ item.document }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.salary }}</td>
+        <td>{{ item.isFemale ? "Female" : "Male" }}</td>
+        <td>{{ item.dateOfBirth }}</td>
+        <td>
+          <button class="btn btn-success" (click)="edit(item)">Edit</button>
+          <button class="btn btn-danger" (click)="delete(item._id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>

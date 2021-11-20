@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
   public email: AbstractControl
   public salary: AbstractControl
   public isFemale: AbstractControl
-  public dateOfBirth: AbstractControl
+  public dateOfBirth: AbstractControl 
   public employees: any[] = [] //lista de empleados. aqui se guardarán los resultados del list
   public selectedId = ""
   public submitted = false
@@ -84,11 +84,11 @@ export class FormComponent implements OnInit {
     if (this.selectedId) {
       this.commitEdit()
     } else {
-      console.log('form value',this.form.value)
-      const formValues = {...this.form.value, salary:Number(this.form.get('salary')?.value)}
+      // console.log('form value',this.form.value)
+      const formValues = {...this.form.value, salary:Number(this.form.get('salary')?.value), isFemale: this.form.get('isFemale')?.value =="f"? true : false}
       console.log('form values after casting',formValues);
       
-      this.empleadoService.create(this.form.value).subscribe({
+      this.empleadoService.create(formValues).subscribe({
         next: (res: any) => {
           if (res.status) {
             console.log('Usuario registrado',res)
@@ -107,6 +107,7 @@ export class FormComponent implements OnInit {
   reset() {
     this.form.reset()
     this.submitted = false
+    this.editting = false
   }
 
   edit(item: any) {
@@ -116,7 +117,7 @@ export class FormComponent implements OnInit {
     this.form.get('phone')?.setValue(item.phone)
     this.form.get('email')?.setValue(item.email)
     this.form.get('salary')?.setValue(item.salary)
-    this.form.get('isFemale')?.setValue(item.isFemale)
+    this.form.get('isFemale')?.setValue(item.isFemale==true?"f":"m")
     this.form.get('dateOfBirth')?.setValue(item.dateOfBirth)
     this.selectedId = item._id
     this.editting=true
@@ -126,15 +127,14 @@ export class FormComponent implements OnInit {
     console.log('item de select gender',value);
     
     this.form.get('isFemale')?.setValue(value)
+    console.log('form values',this.form.value);
+    
   }
 
   selectDate(value:any){
-    // console.log('item de select date',value.target.value);
-    // console.log('date transformada', new Date(value.target.value));
+    console.log('item de select date',value.target.value);
     
-    const dob = new Date(value.target.value)
-    
-    this.form.get('dateOfBirth')?.setValue(dob)
+    this.form.get('dateOfBirth')?.setValue(value.target.value)
   }
 
   commitEdit() {
@@ -151,7 +151,7 @@ export class FormComponent implements OnInit {
           email: this.form.get('email')?.value,
           salary: Number(this.form.get('salary')?.value),
           isFemale: this.form.get('isFemale')?.value,
-          dateOfBirth: this.form.get('dateOfBirth')?.value,
+          dateOfBirth:this.form.get('dateOfBirth')?.value,
         },this.selectedId).subscribe({
           next: (res: any) => {
             if (res.status) {
@@ -190,8 +190,7 @@ export class FormComponent implements OnInit {
     this.empleadoService.list().subscribe({
       next: (res: any) => {
         if (res.length>0) {
-          this.employees = res.map((item:any)=>{return {...item, dateOfBirth: new Date(item.dateOfBirth).toLocaleDateString()}})
-          // [...res, dateOfBirth : new Date(res.dateOfBirth).toLocaleDateString()}
+          this.employees = res
         }
       },
       complete: () => { console.log('Usuarios listados') }, // completeHandler

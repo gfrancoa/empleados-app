@@ -10,7 +10,7 @@ ctrlEmpleado.create = async (req, res) => {
     email: req.body.email,
     salary: req.body.salary,
     isFemale: req.body.isFemale,
-    dateOfBirth: new Date(req.body.dateOfBirth),
+    dateOfBirth: req.body.dateOfBirth,
   });
 
   await newEmpleado.save();
